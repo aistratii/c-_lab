@@ -8,34 +8,35 @@ namespace ConsoleApp1.algorythm.sorting {
     class CombSort : SortingAlgorythm {
         private int[] originalArray;
         private int[] finalArray;
+        private PrintQueue printQueue;
 
         public CombSort(int[] input) {
             this.originalArray = input;
             this.finalArray = input;
+            this.printQueue = new PrintQueue(0.5f);
         }
 
         public void sort() {
-            int range = (finalArray.Length * 10) / 13; // "%" ?
+            int range = (finalArray.Length * 10) / 13;
 
-            printArrayWithMessage("Original array", originalArray);
+            printQueue.push(originalArray, "Original array", 0, 0, State.NONE);
 
-            do {
-                Console.WriteLine("*************************");
-
+            do { 
                 Tuple<int, int[]> rangeAndArray = parseOnce(range, finalArray);
-
-                Console.WriteLine("New range: " + range);
 
                 range = rangeAndArray.Item1;
                 finalArray = rangeAndArray.Item2;
             }
             while (range != 0);
+
+            printQueue.push(finalArray, null, 0, 0, State.DONE);
         }
 
         private Tuple<int, int[]> parseOnce(int range, int[] array) {
-            printArrayWithMessage("Analyzing: ", array);
 
             for (int i = 0; i < array.Length - range; i++) {
+                printQueue.push(array, null, i, i + range, State.COMPARING);
+
                 int j = i + range;
                 array = compareAndSwitch(array, i, j);
             }
@@ -44,34 +45,19 @@ namespace ConsoleApp1.algorythm.sorting {
         }
 
         private int[] compareAndSwitch(int[] array, int i, int j) {
-            int[] result = new int[array.Length];
-
-            for (int x = 0; x < array.Length; x++)
-                result[x] = array[x];
-
-            Console.WriteLine("Comparing position {0}(value = {1}) with {2}(value = {3})", i, array[i], j, array[j]);
+            int[] result = (int[])array.Clone();
 
             if (result[i] > result[j]) {
-                Console.WriteLine("Switching {0} with {1}", i, j);
-                printArrayWithBrackets(array, i, j);
+                printQueue.push(array, null, i, j, State.SWITCHING);
 
                 int temp = result[i];
                 result[i] = result[j];
                 result[j] = temp;
-
-                printArrayWithMessage("Resulted array: ", result);
+            } else {
+                printQueue.push(array, null, i, j, State.NOT_SWITCHING);
             }
 
             return result;
-        }
-
-        private void printArrayWithBrackets(int[] array, params int[] indexes) {
-            for (int i = 0; i < array.Length; i++)
-                if (indexes.Contains(i))
-                        Console.Write("[{0}] ", array[i]);
-                    else
-                        Console.Write(array[i] + " ");
-            Console.WriteLine();
         }
 
         public int[] getFinalArray() {
@@ -88,7 +74,7 @@ namespace ConsoleApp1.algorythm.sorting {
         }
 
         public void animate() {
-            throw new NotImplementedException();
+            printQueue.printAll();
         }
     }
 }

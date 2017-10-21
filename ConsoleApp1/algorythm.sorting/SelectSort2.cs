@@ -8,10 +8,11 @@ namespace ConsoleApp1.algorythm.sorting {
     class SelectSort2 : SortingAlgorythm {
         private int[] originalArray;
         private int[] finalResult;
-
+        private PrintQueue printQueue;
 
         public SelectSort2(int[] array) {
             originalArray = array;
+            this.printQueue = new PrintQueue(0.5f);
         }
 
 
@@ -21,6 +22,8 @@ namespace ConsoleApp1.algorythm.sorting {
             int []remainingArray = this.originalArray;
 
             printOriginal();
+            //printQueue.push(originalArray, "Original array", 0, 0, State.NONE);
+
             while (resultIndex < originalArray.Length) {
                 var minAndIndex = findMin(remainingArray);
 
@@ -73,9 +76,15 @@ namespace ConsoleApp1.algorythm.sorting {
 
                 int lastMinIndex = 0;
                 for (int i = 1; i < remainingArray.Length; i++) {
+                    //printQueue.push(remainingArray, null, 0, i, State.COMPARING);
+
                     if (tmp > remainingArray[i]) {
+                        //printQueue.push(remainingArray, null, 0, i, State.SWITCHING);
+
                         tmp = remainingArray[i];
                         lastMinIndex = i;
+                    } else {
+                        //printQueue.push(remainingArray, null, 0, i, State.NOT_SWITCHING);
                     }
                 }
 
@@ -130,7 +139,7 @@ namespace ConsoleApp1.algorythm.sorting {
         }
 
         public void animate() {
-            throw new NotImplementedException();
+            printQueue.printAll();
         }
     }
 }

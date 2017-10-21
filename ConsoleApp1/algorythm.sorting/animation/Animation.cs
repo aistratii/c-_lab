@@ -91,6 +91,8 @@ namespace ConsoleApp1.algorythm.sorting.animation {
                 return "Switching elements of index {0} with {1}".Replace("{0}", leftIndex.ToString()).Replace("{1}", rightIndex.ToString());
             else if (state == State.NOT_SWITCHING)
                 return "Not switcing elements of index {0} with {1}".Replace("{0}", leftIndex.ToString()).Replace("{1}", rightIndex.ToString());
+            else if (state == State.DONE)
+                return "Done";
             else return "NO_MESSAGE_FOR_THIS_STATE";
         }
 

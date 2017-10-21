@@ -10,16 +10,17 @@ namespace ConsoleApp1 {
         static void Main(string[] args) {
             int[] input = readInput(true);
 
-            SortingAlgorythm selectSort2 = new BubbleSort(input);
-            selectSort2.sort();
-            selectSort2.animate();
-
-            //BubbleSort bubbleSort = new BubbleSort(input);
+            //SortingAlgorythm bubbleSort = new BubbleSort(input);
             //bubbleSort.sort();
-            //bubbleSort.getFinalArray();
+            //bubbleSort.animate();
 
-            //CombSort combSort = new CombSort(input);
-            //combSort.sort();
+            //SortingAlgorythm selectSort = new SelectSort2(input);
+            //selectSort.sort();
+            //selectSort.animate();
+
+            SortingAlgorythm combSort = new CombSort(input);
+            combSort.sort();
+            combSort.animate();
             //combSort.getFinalArray();
 
             Console.Read();
