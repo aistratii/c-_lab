@@ -8,20 +8,21 @@ using System.Threading.Tasks;
 namespace ConsoleApp1 {
     class Program {
         static void Main(string[] args) {
+
+            //Lab1
             int[] input = readInput(true);
 
             //SortingAlgorythm bubbleSort = new BubbleSort(input);
             //bubbleSort.sort();
             //bubbleSort.animate();
 
-            //SortingAlgorythm selectSort = new SelectSort2(input);
-            //selectSort.sort();
-            //selectSort.animate();
+            SortingAlgorythm selectSort = new SelectSort2(input);
+            selectSort.sort();
+            selectSort.animate();
 
-            SortingAlgorythm combSort = new CombSort(input);
-            combSort.sort();
-            combSort.animate();
-            //combSort.getFinalArray();
+            //SortingAlgorythm combSort = new CombSort(input);
+            //combSort.sort();
+            //combSort.animate();
 
             Console.Read();
         }
