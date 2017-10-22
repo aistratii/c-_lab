@@ -54,12 +54,13 @@
     <Compile Include="algorythm.sorting\PrintQueue.cs" />
     <Compile Include="algorythm.sorting\SelectSort2.cs" />
     <Compile Include="algorythm.sorting\SortingAlgorythm.cs" />
-    <Compile Include="lab2\StudentNote.cs" />
+    <Compile Include="lab3\StudentNote.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.algorythm.sorting;
+using ConsoleApp1.lab3;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +9,29 @@ using System.Threading.Tasks;
 namespace ConsoleApp1 {
     class Program {
         static void Main(string[] args) {
-
             //Lab1
-            int[] input = readInput(true);
+            //int[] input = readInput(true);
 
             //SortingAlgorythm bubbleSort = new BubbleSort(input);
             //bubbleSort.sort();
             //bubbleSort.animate();
 
-            SortingAlgorythm selectSort = new SelectSort2(input);
-            selectSort.sort();
-            selectSort.animate();
+            //SortingAlgorythm selectSort = new SelectSort2(input);
+            //selectSort.sort();
+            //selectSort.animate();
 
             //SortingAlgorythm combSort = new CombSort(input);
             //combSort.sort();
             //combSort.animate();
+
+            //Lab3
+            StudentNote studentNote = new StudentNote(false);
+            int student = 1;
+            int subj = 1;
+            Console.WriteLine("Media pentru studentul {0} la obiectul {1} este {2}",
+                studentNote.getStudents()[student],
+                studentNote.getSubjects()[subj],
+                studentNote.mediaPentruStudentLaObiect(student, subj));
 
             Console.Read();
         }
