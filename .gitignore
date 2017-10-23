@@ -1,2 +1,14 @@
-.vs
+/.*
+*.suo
+!/.gitignore
+/CLab.csproj
+/CLab.csproj.user
+/CLab.sln
+/obj
+/bin
+
 ConsoleApp1/bin
+ConsoleApp1.sln
+ConsoleApp1/App.config
+ConsoleApp1/ConsoleApp1.csproj
+ConsoleApp1/Properties
