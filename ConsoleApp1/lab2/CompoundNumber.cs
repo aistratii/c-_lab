@@ -91,7 +91,7 @@ namespace ConsoleApp1.lab2 {
 
         internal bool isNonNegative() {
             try {  
-            return numerator / denominator >= 0;
+                return numerator / denominator >= 0;
             } catch (DivideByZeroException ex) {
                 return true;
             }
@@ -103,14 +103,17 @@ namespace ConsoleApp1.lab2 {
 
         public override string ToString() {
             //else if (Math.Truncate(numerator/denominator).ToString().)
-            if (denominator != 0 && numerator != 0) {
+            /*if (denominator != 0 && numerator != 0) {
                 if (numerator % denominator == 0)
                     return numerator / denominator + "";
                 else
                     return numerator + "/" + denominator;
             } 
             else 
-                return "0";
+                return "0";*/
+            return "[{0}/{1}]"
+                .Replace("{0}", numerator.ToString())
+                .Replace("{1}", denominator.ToString());
         }   
     }
 }

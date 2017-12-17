@@ -41,24 +41,38 @@ namespace CLab {
             //    studentNote.getSubjects()[subj],
             //    studentNote.mediaPentruStudentLaObiect(student, subj));
 
-            /*CompoundNumber[,] matrix = new CompoundNumber[4, 4] { 
-                { new CompoundNumber(1), new CompoundNumber(3), new CompoundNumber(-2) , new CompoundNumber(1)}, 
-                { new CompoundNumber(5), new CompoundNumber(1), new CompoundNumber(0), new CompoundNumber(-1)},
-                { new CompoundNumber(0), new CompoundNumber(1), new CompoundNumber(0), new CompoundNumber(-2)},
-                { new CompoundNumber(2), new CompoundNumber(-1), new CompoundNumber(0), new CompoundNumber(3)} };*/
-            /*CompoundNumber[,] matrix = new CompoundNumber[3, 3] {
-                { new CompoundNumber(1), new CompoundNumber(1), new CompoundNumber(1)},
-                { new CompoundNumber(0), new CompoundNumber(2), new CompoundNumber(5)},
-                { new CompoundNumber(2), new CompoundNumber(5), new CompoundNumber(-1)}};
-            Determinant determinant = new Determinant(matrix);
-            Console.WriteLine(determinant.getValue());*/
+            CompoundNumber[,] matrix4 = new CompoundNumber[4, 5] { 
+                { new CompoundNumber(-1), new CompoundNumber(-2), new CompoundNumber(0) , new CompoundNumber(3), new CompoundNumber(-6)}, 
+                { new CompoundNumber(2), new CompoundNumber(3), new CompoundNumber(4), new CompoundNumber(4), new CompoundNumber(22)},
+                { new CompoundNumber(2), new CompoundNumber(2), new CompoundNumber(3), new CompoundNumber(5), new CompoundNumber(20)},
+                { new CompoundNumber(3), new CompoundNumber(1), new CompoundNumber(-5), new CompoundNumber(7), new CompoundNumber(-34)} };
+            CompoundNumber[,] matrix3 = new CompoundNumber[3, 4] {
+                { new CompoundNumber(-1), new CompoundNumber(2), new CompoundNumber(0) , new CompoundNumber(6)},
+                { new CompoundNumber(2), new CompoundNumber(3), new CompoundNumber(4), new CompoundNumber(40)},
+                { new CompoundNumber(2), new CompoundNumber(2), new CompoundNumber(3), new CompoundNumber(30)}
+            };
 
             //TODO: Investigate determinant calculation for 3+ levels
 
             Ecuation ecuation = new Ecuation();
-            EcuationFiller.fill(ecuation);
-            ecuation.solve();
-            ecuation.prettyPrint();
+            ecuation.setEcuation(matrix4);
+            //ecuation.solve();
+            //ecuation.prettyPrint();
+            Console.WriteLine(new Determinant(
+                     new int[4, 4] {
+                         { 1, 2, 3, -2},
+                         { -1, 0, 5, 1},
+                         { 4, 1, -1, 3},
+                         { 3, 2, 1, 4}
+                     }
+                     /*new int[4, 4] {
+                        { 1, 0, 0, 0},
+                        { -1, 2, 8, -1},
+                        { -4, -7, -13, 11},
+                        { 3, -4, -8, 10}
+                    }*/
+
+                ).getValue());//should be 264
 
             Console.Read();
         }

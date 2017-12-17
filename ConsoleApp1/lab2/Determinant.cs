@@ -14,7 +14,6 @@ namespace CLab.ConsoleApp1.lab2 {
             return new CompoundNumber(sign) * value;
         }
 
-        //TODO FIX 3+ level matrix
         public Determinant(CompoundNumber[,] matrix, int excludeRow, int excludeColumn) {
             CompoundNumber[,] newMatrix = new CompoundNumber[matrix.GetUpperBound(0), matrix.GetUpperBound(1)];
 
@@ -68,6 +67,16 @@ namespace CLab.ConsoleApp1.lab2 {
             initiateThis(matrix);
         }
 
+        public Determinant(int[,] matrix) {
+            CompoundNumber[,] convertedMatrix = new CompoundNumber[matrix.GetUpperBound(0) + 1, matrix.GetUpperBound(1) + 1];
+
+            for (int i = 0; i <= matrix.GetUpperBound(0); i++)
+                for (int j = 0; j <= matrix.GetUpperBound(1); j++)
+                    convertedMatrix[i, j] = new CompoundNumber(matrix[i,j]);
+
+            initiateThis(convertedMatrix);
+        }
+
 
         private void initiateThis(CompoundNumber[,] matrix) {
             if (matrix.GetUpperBound(0) > 2 || matrix.GetUpperBound(1) > 2) {
@@ -96,15 +105,12 @@ namespace CLab.ConsoleApp1.lab2 {
                 else if (matrix.GetUpperBound(0) == 1)
                     this.value = (matrix[0, 0] * matrix[1, 1]) - (matrix[0, 1] * matrix[1, 0]);
                 else if (matrix.GetUpperBound(0) == 2) {
-                    CompoundNumber main = matrix[0, 0] * matrix[1, 1] * matrix[2, 2]
+                    this.value =  matrix[0, 0] * matrix[1, 1] * matrix[2, 2]
                                 + matrix[0, 1] * matrix[1, 2] * matrix[2, 0]
-                                + matrix[0, 2] * matrix[1, 0] * matrix[2, 1];
-
-                    CompoundNumber secondary = matrix[2, 0] * matrix[1, 1] * matrix[0, 2]
-                                + matrix[2, 1] * matrix[1, 2] * matrix[0, 0]
-                                + matrix[2, 2] * matrix[1, 0] * matrix[0, 1];
-
-                    this.value = main - secondary;
+                                + matrix[0, 2] * matrix[1, 0] * matrix[2, 1]
+                                - matrix[2, 0] * matrix[1, 1] * matrix[0, 2]
+                                - matrix[2, 1] * matrix[1, 2] * matrix[0, 0]
+                                - matrix[2, 2] * matrix[1, 0] * matrix[0, 1];
                 }
 
                 //(0, 0) | (0, 1) | (0, 2)
@@ -134,13 +140,15 @@ namespace CLab.ConsoleApp1.lab2 {
         private CompoundNumber calculateDeterminantByRow(CompoundNumber[,] matrix, int row) {
             List<CompoundNumber> determinantLists = new List<CompoundNumber>();
 
-            for (int i = 0; i < matrix.GetUpperBound(0); i++) {
-                determinantLists.Add(new Determinant(matrix, row, i).getValue());
+            for (int i = 0; i <= matrix.GetUpperBound(0); i++) {
+                determinantLists.Add(matrix[row, i] * new Determinant(matrix, row, i).getValue());
             }
 
-            CompoundNumber result = determinantLists[0];
-            for (int i = 1; i < determinantLists.Count(); i++) {
-                result = result + determinantLists[i];
+            CompoundNumber result = null;
+            for (int i = 0; i < determinantLists.Count(); i++) {
+                result = result != null
+                    ? result + (i % 2 != 0 ? new CompoundNumber(1) : new CompoundNumber(-1)) * determinantLists[i]
+                    : determinantLists[i];
             }
 
             return result;
